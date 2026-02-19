@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Лучший результат плавания</title>
+  <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+
+<div id="app">
+  <h2>Определение лучшего результата</h2>
+
+  <p>
+    Спортсмен 1 (сек):
+    <input type="number" v-model.number="t1">
+  </p>
+
+  <p>
+    Спортсмен 2 (сек):
+    <input type="number" v-model.number="t2">
+  </p>
+
+  <p>
+    Спортсмен 3 (сек):
+    <input type="number" v-model.number="t3">
+  </p>
+
+  <button @click="findBest">Определить победителя</button>
+
+  <p>{{ result }}</p>
+</div>
+
+<script>
+Vue.createApp({
+  data() {
+    return {
+      t1: 0,
+      t2: 0,
+      t3: 0,
+      result: ""
+    }
+  },
+  methods: {
+    findBest() {
+
+      let bestTime = this.t1;
+      let winner = "Спортсмен 1";
+
+      if (this.t2 < bestTime) {
+        bestTime = this.t2;
+        winner = "Спортсмен 2";
+      }
+
+      if (this.t3 < bestTime) {
+        bestTime = this.t3;
+        winner = "Спортсмен 3";
+      }
+
+      this.result = winner + " победил с результатом " + bestTime + " сек.";
+    }
+  }
+}).mount("#app");
+</script>
+
+</body>
+</html>
